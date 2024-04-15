@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CudaCompile Include="setUp.cu">
+      <Filter>src</Filter>
+    </CudaCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="inc">
+      <UniqueIdentifier>{6d37a966-ff2a-497d-bd29-93e2dbd49b22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{b3f68e07-e02c-47fe-9cbb-d5788ef835cd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="domain.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="setUp.cuh">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="EasyBMP.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="EasyBMP_BMP.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="EasyBMP_DataStructures.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="EasyBMP_VariousBMPutilities.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="postProc.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="domain.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="EasyBMP.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="postProc.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
