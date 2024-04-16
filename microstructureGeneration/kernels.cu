@@ -1,4 +1,4 @@
-#include "setUp.cuh"
+#include "kernels.cuh"
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 #include<iostream>
@@ -34,11 +34,12 @@ void setConstantCache(Domain& domain)
 
 void __global__ growGrain(int* matrixInput, int* matrixOutput)
 {
+	__shared__ int local_matrix[32][32];
 	int x = threadIdx.x + blockIdx.x * blockDim.x;
 	int y = threadIdx.y + blockIdx.y * blockDim.y;
 	if (x  >= dimX || y >= dimY) return;
 
-	int myValue = matrixInput[y * dimX + x];
+	local_matrix[threadIdx.y][threadIdx.x] = matrixInput[y * dimX + x];
 	for (int k = 0; k < NeighbourhoodSize; k+=2)
 	{	
 		if ((x + neighbourhood[k]) >= dimX || (y + neighbourhood[k + 1]) >= dimY || (x + neighbourhood[k]) < 0 || (y + neighbourhood[k + 1]) < 0)
@@ -64,7 +65,7 @@ void __global__ growGrain(int* matrixInput, int* matrixOutput)
 				{
 					nY = dimY - 1;
 				}
-				myValue = myValue + matrixInput[dimX * nY + nX] * (myValue == 0);
+				local_matrix[threadIdx.y][threadIdx.x] = local_matrix[threadIdx.y][threadIdx.x] + matrixInput[dimX * nY + nX] * (local_matrix[threadIdx.y][threadIdx.x] == 0);
 				break;
 			}
 			case absorbtion:
@@ -73,9 +74,10 @@ void __global__ growGrain(int* matrixInput, int* matrixOutput)
 			}
 
 		}
-		else myValue = myValue + (myValue == 0) * matrixInput[x + neighbourhood[k] + (y + neighbourhood[k + 1]) * dimX];
+		else local_matrix[threadIdx.y][threadIdx.x] = 
+			local_matrix[threadIdx.y][threadIdx.x] + (local_matrix[threadIdx.y][threadIdx.x] == 0) * matrixInput[x + neighbourhood[k] + (y + neighbourhood[k + 1]) * dimX];
 	}
-	matrixOutput[y * dimX + x] = myValue;
+	matrixOutput[y * dimX + x] = local_matrix[threadIdx.y][threadIdx.x];
 
 
 }

@@ -14,8 +14,8 @@ Domain::Domain(int  x, int y)
 
 Domain::~Domain()
 {
-	//delete[] matrix;
-	//delete[] neighbourhood;
+	delete[] matrix;
+	delete[] neighbourhood;
 }
 
 void Domain::vonNeumann()

@@ -77,7 +77,7 @@
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CudaCompile Include="setUp.cu" />
+    <CudaCompile Include="kernels.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="domain.h" />
@@ -86,7 +86,7 @@
     <ClInclude Include="EasyBMP_DataStructures.h" />
     <ClInclude Include="EasyBMP_VariousBMPutilities.h" />
     <ClInclude Include="postProc.h" />
-    <ClInclude Include="setUp.cuh" />
+    <ClInclude Include="kernels.cuh" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="domain.cpp" />

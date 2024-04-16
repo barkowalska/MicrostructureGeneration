@@ -1,6 +1,6 @@
 #include "postProc.h"
 #include "domain.h"
-#include "setUp.cuh"
+#include "kernels.cuh"
 #include <iostream>
 #include "cuda_runtime.h"
 
