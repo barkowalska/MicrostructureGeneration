@@ -1,6 +1,7 @@
 #include "domain.h"
 #include "EasyBMP.h"
 #include <cstdlib>
+#include<iostream>
 #include "postProc.h"
 
 void picture(Domain& domain)
@@ -22,7 +23,7 @@ void picture(Domain& domain)
 		for (int x = 0; x < domain.getDimX(); x++)
 		{
 			RGBApixel pixel;
-			int value = domain.getMatrix()[y * domain.getDimX() + x];
+			int value = domain(x, y, 0);
 			if (value == 0)
 			{
 				pixel.Red = 0;

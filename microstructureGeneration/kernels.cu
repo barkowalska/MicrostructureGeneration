@@ -71,7 +71,7 @@ void __global__ growGrain(int* matrixInput, int* matrixOutput)
 			case absorbtion:
 				
 				break;
-			}
+			
 
 		}
 		else local_matrix[threadIdx.y][threadIdx.x] = 

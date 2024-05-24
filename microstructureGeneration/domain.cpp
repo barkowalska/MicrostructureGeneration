@@ -1,65 +1,49 @@
 #include "domain.h"
 
-Domain::Domain(int  x, int y)
+Domain::Domain(int  x, int y, int z)
 {
 	dimX = x;
 	dimY = y;
-	matrix = new int[x * y];
-	for (int k=0; k<x*y; k++)
+	dimZ = z;
+	matrix = std::shared_ptr<int[]>(new int[x*y*z]);
+	for (int k=0; k<x*y*z; k++)
 	{
 		matrix[k] = 0;
 	}
 
 }
 
-Domain::~Domain()
+/*Konstruktor kopiuj¹cy*/
+Domain::Domain(const Domain& domain)
 {
-	delete[] matrix;
-	delete[] neighbourhood;
+	dimX = domain.dimX;
+	dimY = domain.dimY;
+	dimZ = domain.dimZ;
+	matrix = std::shared_ptr<int[]>(new int[dimX * dimY * dimZ]);
+	for (int k = 0; k < dimX * dimY * dimZ; k++)
+	{
+		matrix[k] = domain.matrix[k];
+	}
 }
 
-void Domain::vonNeumann()
+Domain& Domain::operator=(const Domain& domain)
 {
-	neighbourhood = new int[8];
-	neighbourhoodSize = 8;
-
-	neighbourhood[0] = -1;
-	neighbourhood[1] = 0;
-	neighbourhood[2] = 1;
-	neighbourhood[3] = 0; 
-	neighbourhood[4] = 0;
-	neighbourhood[5] = -1;
-	neighbourhood[6] = 0;
-	neighbourhood[7] = 1;
+	dimX = domain.dimX;
+	dimY = domain.dimY;
+	dimZ = domain.dimZ;
+	matrix.reset();
+	matrix = std::shared_ptr<int[]>(new int[dimX * dimY * dimZ]);
+	for (int k = 0; k < dimX * dimY * dimZ; k++)
+	{
+		matrix[k] = domain.matrix[k];
+	}
+	return *this;
 }
 
-void Domain::moore()
-{
-	neighbourhood = new int[16];
-	neighbourhoodSize = 16;
+Domain::~Domain() {	}
 
-	neighbourhood[0] = -1;
-	neighbourhood[1] = 0;
-	neighbourhood[2] = 1;
-	neighbourhood[3] = 0;
-	neighbourhood[4] = 0;
-	neighbourhood[5] = -1;
-	neighbourhood[6] = 0;
-	neighbourhood[7] = 1;
-
-	neighbourhood[8] = -1;
-	neighbourhood[9] = -1;
-	neighbourhood[10] = 1;
-	neighbourhood[11] = 1;
-	neighbourhood[12] = -1;
-	neighbourhood[13] = 1;
-	neighbourhood[14] = 1;
-	neighbourhood[15] = -1;
-}
-
-
-
-void Domain::nucleation()
+/*Zarodkowanie losowe*/
+void Domain::nucleation_random()
 {
 	int n= grainNumber;
 	
@@ -67,8 +51,31 @@ void Domain::nucleation()
 	{
 		int x = std::rand() % dimX;
 		int y = std::rand() % dimY;
+		int z = std::rand() % dimZ;
 
-		matrix[y * dimX + x] = n;
+		matrix[z* dimX* dimY + y * dimX + x] = n;
 		n--;
+	}
+}
+/*zarodkowanie jednorodne*/
+void Domain::nucleation_uniform()
+{
+	int n = grainNumber;
+	int kloc = (dimY* dimX) / n;
+	int pier = sqrt(kloc);
+	int x = pier/2;
+	int y = pier/2;
+
+	while (x < dimX && n>0)
+	{
+
+		while (y < dimY)
+		{
+			matrix[y * dimX + x] = n;
+			y += pier;
+			n--;
+		}
+		y = pier / 2;
+		x += pier;
 	}
 }
