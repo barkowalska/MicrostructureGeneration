@@ -43,3 +43,49 @@ int MaxNumber::value(std::vector<int>& values)
 	int maxValue = max.first;
 	return maxValue;
 }
+
+int Energy::value(std::vector<int>& values)
+{
+	double Energy1 = 0;
+	double Energy2 = 0;
+	double E;
+	int m;
+
+	for (int i : values)
+	{
+		if (values.back() == i) m = 1;
+		else m = 0;
+
+		Energy1 += (1 - m);
+	}
+
+	int rand = std::rand() % 8;
+
+	for (int i : values)
+	{
+		if (values[rand] == i) m = 1;
+		else m = 0;
+
+		Energy2 += (1 - m);
+	}
+
+	E = Energy2 - Energy1;
+
+	double kt = 0.1;
+	double propability;
+	if (E <= 0) propability = 1;
+	else
+	{
+		propability = exp((-1) * E / kt);
+	}
+
+	std::random_device rd;  // Will be used to obtain a seed for the random number engine
+	std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
+	std::uniform_real_distribution<> dis(0, 1.0);
+
+	if (propability >= dis(gen))
+	{
+		return values[rand];
+	}
+	else return values.back();
+}

@@ -8,33 +8,36 @@ public:
 	/*
 		Zwraca pozycjê s¹siada w stosunku do komórki {x,y,z}
 	*/
-	virtual vector getNext() = 0;
+	virtual vec getNext() = 0;
 	virtual ~Neighbours() = default;
 };
 
+/*s¹siedztwo Moore*/
 class Moore:public Neighbours
 {
 private:
-	vector pos[9];
+	vec pos[9];
 public:
-	vector getNext() override;
+	vec getNext() override;
 	Moore();
 };
 
+/*s¹siedztwo Von Neumann*/
 class VonNeumann :public Neighbours
 {
 private:
-	vector pos[5];
+	vec pos[5];
 public:
-	vector getNext() override;
+	vec getNext() override;
 	VonNeumann();
 };
 
+/*Losowe s¹siedztwo pentagonalne*/
 class Random :public Neighbours
 {
 private:
-	vector pos[9];
+	vec pos[9];
 public:
-	vector getNext() override;
+	vec getNext() override;
 	Random();
 };

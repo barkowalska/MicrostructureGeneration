@@ -18,7 +18,7 @@ Moore::Moore()
 }
 
 
-vector Moore::getNext()
+vec Moore::getNext()
 {
 	static int index = -1;
 	index++;
@@ -44,7 +44,7 @@ VonNeumann::VonNeumann()
 	}
 }
 
-vector VonNeumann::getNext()
+vec VonNeumann::getNext()
 {
 	static int index = -1;
 	index++;
@@ -70,7 +70,7 @@ Random::Random()
 	
 }
 
-vector Random::getNext()
+vec Random::getNext()
 {
 	static int i = std::abs(rand()%7);
 	i++;
@@ -85,3 +85,4 @@ vector Random::getNext()
 	else if (i > 7)i = 0;
 	return pos[i];
 }
+

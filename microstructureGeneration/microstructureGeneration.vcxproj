@@ -87,6 +87,7 @@
     <ClInclude Include="postProc.h" />
     <ClInclude Include="Rules.h" />
     <ClInclude Include="Simulation.h" />
+    <ClInclude Include="Stats.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="domain.cpp" />
@@ -96,6 +97,7 @@
     <ClCompile Include="postProc.cpp" />
     <ClCompile Include="Rules.cpp" />
     <ClCompile Include="Simulation.cpp" />
+    <ClCompile Include="Stats.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <random>
 
 class Rules
 {
@@ -15,4 +16,12 @@ private:
 	int counter;
 public:
 	int value(std::vector<int>& values) override; 
+};
+
+class Energy :public Rules
+{
+private:
+	int counter;
+public:
+	int value(std::vector<int>& values) override;
 };

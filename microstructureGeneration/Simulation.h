@@ -3,6 +3,9 @@
 #include "Neighbours.h"
 #include <memory>
 #include "domain.h"
+#include <unordered_set>
+#include <vector>
+
 
 class Simulation
 {
@@ -21,5 +24,7 @@ public:
 	Domain& domain() { return domain_; }
 	void run();
 	int value(int x, int y, int z);
+	void randomCel();
+	void energy(int x, int y, int z);
 };
 

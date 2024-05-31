@@ -3,8 +3,10 @@
 #include <cstdlib>
 #include<iostream>
 #include "postProc.h"
+#include <vector>
+#include <algorithm>
 
-void picture(Domain& domain)
+void picture(Domain& domain, std::string name )
 {
 	srand(time(NULL));
 	int grainNum = domain.getGrainNumber();
@@ -40,6 +42,8 @@ void picture(Domain& domain)
 			bmp.SetPixel(x, y, pixel);
 		}
 	}
-	bmp.WriteToFile("result.bmp");
+
+	bmp.WriteToFile(name.c_str());
 }
 	
+
